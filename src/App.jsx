@@ -5,21 +5,16 @@ import './App.css'
 
 function App() {
   useEffect(() => {
-    fetch("https://workwithus.lucioai.com/access-check", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2V5dXIgRyBLdWxrYXJuaSIsImVtYWlsIjoia3Vsa2FybmlrZXl1ci5nQGdtYWlsLmNvbSIsImRhdGUiOiIyMDI1LTA0LTA4IDE0OjAwOjQ5In0.8cq59mJbRmHvS4L4OF50zggKepn39uYR6wBQ9rrVV2M",
-        "Origin": "https://lucioai.com",
-        "Referer": "https://lucioai.com/",
-      },
-      body: JSON.stringify({ name: "mr_robot" })
-    })
-      .then((res) => res.json())
-      .then(console.log)
-      .catch(console.error);
+    for (let i = 0; i < 25; i++) {
+      fetch("/api/access-check", {
+        method: "GET"
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(`Response ${i + 1}:`, data);
+        })
+        .catch((err) => console.error(`Error ${i + 1}:`, err));
+    }
   }, []);
 
   return (
